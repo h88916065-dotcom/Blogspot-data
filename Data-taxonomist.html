@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conscious-Designs3 | Remote Data Taxonomist Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="data" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="15" cy="5" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="15" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23data)"/></svg>');
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 1rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+
+        .portfolio-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .education-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.8rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, textarea, select {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                gap: 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Conscious-Designs3</h1>
+            <p class="tagline">Professional Remote Data Taxonomist Services | Data Classification & Information Architecture</p>
+        </header>
+
+        <nav>
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showPage('home')">Home</button>
+                <button class="nav-btn" onclick="showPage('services')">Services</button>
+                <button class="nav-btn" onclick="showPage('portfolio')">Portfolio</button>
+                <button class="nav-btn" onclick="showPage('education')">Education</button>
+                <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+            </div>
+        </nav>
+
+        <main>
+            <!-- HOME PAGE -->
+            <div id="home" class="page active">
+                <div class="section">
+                    <h2>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M3,3H21V5H3V3M3,7H21V9H3V7M3,11H21V13H3V11M3,15H21V17H3V15M3,19H21V21H3V19Z"/>
+                        </svg>
+                        Welcome to Conscious-Designs3
+                    </h2>
+                    <p>Specializing in remote data taxonomy and information architecture services for organizations worldwide. With expertise in data classification, metadata management, and content organization, I provide structured, scalable, and intuitive data frameworks for your digital transformation needs.</p>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <span class="stat-number">10M+</span>
+                        <span>Records Classified</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">150+</span>
+                        <span>Projects Completed</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">25+</span>
+                        <span>Industries Served</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <span>Years Experience</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Why Choose Remote Data Taxonomy Services?</h3>
+                    <p>Remote data taxonomy work offers flexibility, cost-effectiveness, and access to specialized expertise without geographical constraints. I utilize advanced data analysis tools, machine learning algorithms, and industry-standard frameworks to create robust classification systems that scale with your organization's growth.</p>
+                </div>
+            </div>
+
+            <!-- SERVICES PAGE -->
+            <div id="services" class="page">
+                <div class="section">
+                    <h2>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                        </svg>
+                        Professional Services
+                    </h2>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Data Classification & Categorization</h3>
+                        <p>Systematic organization of unstructured data into hierarchical taxonomies. Custom classification schemes based on business requirements, industry standards, and user needs.</p>
+                        <strong>Rate: $75-200 per dataset</strong>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Metadata Management</h3>
+                        <p>Creation and standardization of metadata schemas, tagging systems, and data dictionaries. Ensuring data discoverability and compliance with governance standards.</p>
+                        <strong>Rate: $100-250 per schema</strong>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Information Architecture</h3>
+                        <p>Design of intuitive navigation structures, content hierarchies, and user-centered information organization for websites, applications, and knowledge bases.</p>
+                        <strong>Rate: $1000-3000 per project</strong>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Content Taxonomy Development</h3>
+                        <p>Building comprehensive content classification systems for digital asset management, e-commerce platforms, and content management systems.</p>
+                        <strong>Rate: $80-150 per hour</strong>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Data Governance Frameworks</h3>
+                        <p>Establishing data classification policies, access controls, and compliance frameworks. Implementation of data lineage and quality management systems.</p>
+                        <strong>Rate: $120-200 per hour</strong>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Automated Classification Systems</h3>
+                        <p>Development of machine learning models for automatic data classification, text mining, and content tagging. Training and optimization of AI-driven taxonomy tools.</p>
+                        <strong>Rate: $150-300 per hour</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORTFOLIO PAGE -->
+            <div id="portfolio" class="page">
+                <div class="section">
+                    <h2>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/>
+                        </svg>
+                        Portfolio Highlights
+                    </h2>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <div class="portfolio-header">
+                            <h3>E-commerce Product Taxonomy</h3>
+                        </div>
+                        <div class="portfolio-content">
+                            <p><strong>Client:</strong> Global Retail Corporation</p>
+                            <p><strong>Duration:</strong> 6 months (2024)</p>
+                            <p><strong>Scope:</strong> Developed comprehensive product taxonomy for 2.5M SKUs across 50+ categories. Implemented machine learning classification system with 95% accuracy rate.</p>
+                            <p><strong>Methods:</strong> Natural language processing, clustering analysis, user behavior analytics</p>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-header">
+                            <h3>Healthcare Data Classification</h3>
+                        </div>
+                        <div class="portfolio-content">
+                            <p><strong>Client:</strong> Regional Medical Center Network</p>
+                            <p><strong>Duration:</strong> 8 months (2023-2024)</p>
+                            <p><strong>Scope:</strong> Classified 5M+ patient records and medical documents. Created HIPAA-compliant taxonomy with automated PHI detection and classification.</p>
+                            <p><strong>Methods:</strong> Medical ontology mapping, privacy-preserving classification, regulatory compliance frameworks</p>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-header">
+                            <h3>Financial Services Knowledge Base</h3>
+                        </div>
+                        <div class="portfolio-content">
+                            <p><strong>Client:</strong> Investment Management Firm</p>
+                            <p><strong>Duration:</strong> 4 months (2024)</p>
+                            <p><strong>Scope:</strong> Organized 15 years of financial research, regulatory documents, and market analysis into searchable taxonomy. Improved information retrieval by 300%.</p>
+                            <p><strong>Methods:</strong> Topic modeling, semantic analysis, faceted classification</p>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-header">
+                            <h3>Legal Document Management System</h3>
+                        </div>
+                        <div class="portfolio-content">
+                            <p><strong>Client:</strong> International Law Firm</p>
+                            <p><strong>Duration:</strong> 10 months (2023)</p>
+                            <p><strong>Scope:</strong> Developed multi-jurisdictional legal taxonomy for 500K+ documents. Integrated with AI-powered contract analysis and case law research tools.</p>
+                            <p><strong>Methods:</strong> Legal ontology development, multilingual classification, automated tagging</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATION PAGE -->
+            <div id="education" class="page">
+                <div class="section">
+                    <h2>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                        </svg>
+                        Education & Qualifications
+                    </h2>
+                </div>
+
+                <div class="education-timeline">
+                    <div class="timeline-item">
+                        <h3>M.S. in Information Science</h3>
+                        <p><strong>University of Washington - Information School</strong> | 2016-2018</p>
+                        <p><strong>Thesis:</strong> "Machine Learning Approaches to Automated Content Classification in Digital Libraries"</p>
+                        <p><strong>Advisor:</strong> Dr. Sarah Chen</p>
+                        <p><strong>Key Courses:</strong> Information Architecture, Data Mining, Knowledge Organization, Human-Computer Interaction, Database Systems</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Graduate Certificate in Data Analytics</h3>
+                        <p><strong>Stanford University</strong> | 2018-2019</p>
+                        <p><strong>Focus:</strong> Machine Learning, Statistical Analysis, and Big Data Processing</p>
+                        <p><strong>Capstone Project:</strong> "Semantic Classification of Scientific Literature Using Deep Learning"</p>
+                        <p><strong>Key Courses:</strong> Machine Learning, Statistical Computing, Data Visualization, Natural Language Processing</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>B.S. in Computer Science (summa cum laude)</h3>
+                        <p><strong>Carnegie Mellon University</strong> | 2012-2016</p>
+                        <p><strong>Major:</strong> Computer Science with concentration in Human-Computer Interaction</p>
+                        <p><strong>Minor:</strong> Cognitive Science</p>
+                        <p><strong>Senior Project:</strong> "Intelligent Content Organization System for Academic Research"</p>
+                        <p><strong>GPA:</strong> 3.92/4.0</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Professional Certifications & Training</h3>
+                    <ul style="padding-left: 2rem; margin-top: 1rem;">
+                        <li><strong>Certified Information Professional (CIP)</strong> - AIIM International (2022)</li>
+                        <li><strong>Data Management Professional (CDMP)</strong> - DAMA International (2021)</li>
+                        <li><strong>AWS Certified Machine Learning Specialty</strong> - Amazon Web Services (2023)</li>
+                        <li><strong>Google Cloud Professional Data Engineer</strong> - Google Cloud (2022)</li>
+                        <li><strong>Information Architecture Institute Certification</strong> - IAI (2020)</li>
+                        <li><strong>Certified Analytics Professional (CAP)</strong> - INFORMS (2021)</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>Publications & Research</h3>
+                    <p><strong>Peer-reviewed Publications:</strong> 12 articles in information science and data management journals</p>
+                    <p><strong>Conference Papers:</strong> 8 presentations at international data science conferences</p>
+                    <p><strong>Technical Whitepapers:</strong> 15 industry publications on taxonomy and classification</p>
+                    <p><strong>Open Source Projects:</strong> 6 data classification tools and libraries on GitHub</p>
+                </div>
+            </div>
+
+            <!-- CONTACT PAGE -->
+            <div id="contact" class="page">
+                <div class="section">
+                    <h2>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4M20,8L12,13L4,8V6L12,11L20,6V8Z"/>
+                        </svg>
+                        Get In Touch
+                    </h2>
+                </div>
+
+                <div class="contact-info">
+                    <p><strong>Email:</strong> contact@conscious-designs3.com</p>
+                    <p><strong>Response Time:</strong> Within 24 hours</p>
+                    <p><strong>Time Zone:</strong> PST (UTC-8) | Available Monday-Friday, 9 AM - 6 PM</p>
+                    <p><strong>Languages:</strong> English (Native), Spanish (Fluent), Mandarin (Conversational)</p>
+                </div>
+
+                <div class="section">
+                    <h3>Project Inquiry Form</h3>
+                    <form class="contact-form" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="organization">Organization/Company</label>
+                            <input type="text" id="organization" name="organization">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Needed *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="data-classification">Data Classification & Categorization</option>
+                                <option value="metadata">Metadata Management</option>
+                                <option value="info-architecture">Information Architecture</option>
+                                <option value="content-taxonomy">Content Taxonomy Development</option>
+                                <option value="data-governance">Data Governance Frameworks</option>
+                                <option value="automation">Automated Classification Systems</option>
+                                <option value="other">Other (specify in message)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeline">Project Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline</option>
+                                <option value="urgent">Within 2 weeks</option>
+                                <option value="standard">1-3 months</option>
+                                <option value="flexible">3-6 months</option>
+                                <option value="ongoing">Ongoing project</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget (USD)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select range</option>
+                                <option value="under-1000">Under $1,000</option>
+                                <option value="1000-5000">$1,000 - $5,000</option>
+                                <option value="5000-15000">$5,000 - $15,000</option>
+                                <option value="15000+">$15,000+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Please describe your data taxonomy needs, data volume, current systems, specific requirements, and any relevant background information..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Project Inquiry</button>
+                    </form>
+                </div>
+
+                <div class="section">
+                    <h3>Collaboration Opportunities</h3>
+                    <p>I welcome collaborations with:</p>
+                    <ul style="padding-left: 2rem; margin-top: 1rem;">
+                        <li>Technology companies and startups</li>
+                        <li>Enterprise organizations</li>
+                        <li>Digital agencies and consultancies</li>
+                        <li>Research institutions</li>
+                        <li>Government agencies</li>
+                        <li>Non-profit organizations</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all nav buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to clicked nav button
+            event.target.classList.add('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.email || !data.service || !data.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real implementation, you would send this data to a server
+            alert(`Thank you, ${data.name}! Your project inquiry has been received. I'll respond within 24 hours to discuss your ${data.service.replace('-', ' ')} project.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Add smooth scrolling effect when switching pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelector('main').scrollTop = 0;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
