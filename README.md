@@ -1,1 +1,1 @@
-This is my first project and all its files for the deployment of a data-managment service blog-page. 
+This is my Dev-opps workflow space. all code can be edited under the GNU Licensing.
